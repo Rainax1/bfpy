@@ -92,10 +92,12 @@ def interpreter(code):
         elif command == '<':
             cellptr = 0 if cellptr <= 0 else cellptr - 1
         if command == "+":
-          cells[cellptr] = cells[cellptr] + 1 if cells[cellptr] < 255 else 0
+          # cells[cellptr] = cells[cellptr] + 1 if cells[cellptr] < 255 else 0
+            cells[cellptr] = (cells[cellptr] + 1) % 256  # Use modulo to wrap around
 
         if command == "-":
-          cells[cellptr] = cells[cellptr] - 1 if cells[cellptr] > 0 else 255
+          # cells[cellptr] = cells[cellptr] - 1 if cells[cellptr] > 0 else 255
+            cells[cellptr] = (cells[cellptr] - 1) % 256  # Use modulo to wrap around
 
         if command == "[" and cells[cellptr] == 0: ptr = bracemap[ptr]
         if command == "]" and cells[cellptr] != 0: ptr = bracemap[ptr]
